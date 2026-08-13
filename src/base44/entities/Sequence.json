@@ -1,0 +1,1 @@
+{"name":"Sequence","indexes":[{"fields":["key"],"unique":true}],"required":["key","value"],"fields":{"key":"string","value":"integer"},"notes":"Allocate with a transactional atomic increment/CAS; never list-then-increment in application code."}
