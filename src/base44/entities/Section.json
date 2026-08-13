@@ -1,0 +1,1 @@
+{"name":"Section","indexes":[{"fields":["acronym"],"unique":true}],"required":["name","acronym","active"],"fields":{"name":"string","acronym":"string","active":"boolean"}}

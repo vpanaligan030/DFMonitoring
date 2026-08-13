@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import{canComplete,getOverutilizedAmount,getRemainingReturnVariance,getUnutilizedAmount,isFinanciallyReconciled,peso}from'../src/domain/financial.js';
+test('exact utilization reconciles and can complete with documents',()=>{const d={status:'UTILIZATION_RECORDED',requested_amount:1000,approved_amount:500,released_amount:100,utilized_amount:100,original_receipt_status:'RECEIVED',fur_status:'RECEIVED'};assert.equal(getUnutilizedAmount(d),0);assert.equal(getOverutilizedAmount(d),0);assert.equal(isFinanciallyReconciled(d),true);assert.equal(canComplete(d),true)});
+test('under-utilization uses released amount and formats two decimals',()=>{const d={requested_amount:1000,approved_amount:500,released_amount:100,utilized_amount:50};assert.equal(getUnutilizedAmount(d),50);assert.match(peso(50),/₱\s?50\.00/)});
+test('partial return preserves variance',()=>{const d={released_amount:100,utilized_amount:50,returned_amount:25,sdo_return_confirmed_amount:25};assert.equal(getRemainingReturnVariance(d),25);assert.equal(isFinanciallyReconciled(d),false);d.partial_return_exception_status='ACCEPTED';assert.equal(isFinanciallyReconciled(d),true)});
+test('over-utilization derives obligation from release',()=>assert.equal(getOverutilizedAmount({released_amount:100,utilized_amount:125}),25));

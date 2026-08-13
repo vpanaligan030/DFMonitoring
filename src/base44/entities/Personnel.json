@@ -1,0 +1,1 @@
+{"name":"Personnel","indexes":[{"fields":["section_id","active"]}],"required":["first_name","last_name","designation","section_id","active"],"fields":{"first_name":"string","middle_name":"string","last_name":"string","rank":"string","designation":"string","section_id":"string","active":"boolean"}}
