@@ -1,1 +1,32 @@
-{"name":"DF","indexes":[{"fields":["reference_number"],"unique":true},{"fields":["section_id","status"]},{"fields":["updated_date"]}],"required":["section_id","status","version","revision_number"],"fields":{"reference_number":"string","section_id":"string","created_by_role":"string","version":"integer","revision_number":"integer","requesting_personnel_id":"string","purpose":"string","activity_requirement":"string","date_needed":"date","fund_source":"string","original_fund_source":"string","df_category":"string","requested_amount":"number","payment_mode":"string","payee":"string","justification":"string","remarks":"string","status":"string","approved_amount":"number","released_amount":"number","utilized_amount":"number","returned_amount":"number","sdo_return_confirmed_amount":"number","reimbursed_amount":"number","section_reimbursement_confirmed_amount":"number","original_receipt_status":"string","fur_status":"string","verification_status":"string","co_decision_history":"json"},"rls":{"read":"SDO/LIAISON/CO or SECTION_USER where assigned_section_id == record.section_id","write":"backend service role only"}}
+{
+  "name": "DF",
+  "indexes": [
+    {"fields": ["reference_number"], "unique": true, "where": "reference_number IS NOT NULL"},
+    {"fields": ["section_id", "status"]},
+    {"fields": ["updated_date"]}
+  ],
+  "required": ["section_id", "status", "version", "revision_number"],
+  "fields": {
+    "reference_number": "string", "section_id": "string", "created_by_role": "string",
+    "created_date": "datetime", "updated_date": "datetime", "version": "integer", "revision_number": "integer",
+    "requesting_personnel_id": "string", "requesting_personnel_name": "string", "purpose": "string",
+    "activity_requirement": "string", "date_needed": "date", "fund_source": "string", "original_fund_source": "string",
+    "fund_source_change_reason": "string", "fund_source_changed_date": "datetime", "df_category": "string",
+    "requested_amount": "number", "payment_mode": "string", "payee": "string", "justification": "string", "remarks": "string",
+    "status": "string", "submitted_date": "datetime", "sdo_review_date": "datetime",
+    "approved_amount": "number", "co_decision": "string", "co_remarks": "string", "decision_by_id": "string",
+    "decision_by_name": "string", "recorded_by_id": "string", "recorded_by_name": "string", "decision_date": "datetime",
+    "co_decision_history": "json", "released_amount": "number", "release_date": "datetime",
+    "utilized_amount": "number", "utilization_date": "datetime", "returned_amount": "number", "return_remarks": "string",
+    "return_date": "datetime", "return_corrected_date": "datetime", "return_status": "string",
+    "sdo_return_confirmed_amount": "number", "sdo_return_confirmation_date": "datetime",
+    "partial_return_exception_status": "string", "partial_return_exception_remarks": "string", "return_discrepancy_open": "boolean",
+    "reimbursed_amount": "number", "reimbursement_status": "string", "reimbursement_date": "datetime",
+    "section_reimbursement_confirmed_amount": "number", "section_reimbursement_confirmation_date": "datetime",
+    "reimbursement_discrepancy_open": "boolean", "original_receipt_status": "string", "original_receipt_received_date": "datetime",
+    "original_receipt_received_by_id": "string", "original_receipt_received_by_name": "string", "fur_status": "string",
+    "fur_received_date": "datetime", "fur_received_by_id": "string", "fur_received_by_name": "string",
+    "verification_status": "string", "verification_date": "datetime", "verified_by_id": "string", "verified_by_name": "string"
+  },
+  "rls": {"read": "SDO/LIAISON/CO or SECTION_USER where assigned_section_id == record.section_id", "write": "backend service role only"}
+}
